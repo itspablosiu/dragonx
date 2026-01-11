@@ -3,182 +3,179 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pobieralnia - Projekty Juliana</title>
+    <title>Julian | Home</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
+            --accent-color: #9d7cff;
             --glass-bg: rgba(255, 255, 255, 0.05);
             --glass-border: rgba(255, 255, 255, 0.1);
-            --accent-color: #a282ff;
         }
 
         body, html {
             margin: 0;
             padding: 0;
-            min-height: 100vh;
-            font-family: 'Inter', -apple-system, sans-serif;
-            background-color: #0a0a0f;
+            height: 100%;
+            font-family: 'Inter', sans-serif;
+            background-color: #0d0d14;
             color: white;
             display: flex;
             justify-content: center;
             align-items: center;
+            overflow: hidden;
         }
 
-        /* Dynamiczne tło */
-        .bg-gradient {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(circle at 20% 30%, rgba(70, 30, 180, 0.2) 0%, transparent 40%),
-                        radial-gradient(circle at 80% 70%, rgba(130, 80, 255, 0.15) 0%, transparent 40%);
+        /* Tło z poświatami */
+        .bg-blobs {
+            position: absolute;
+            width: 100%;
+            height: 100%;
             z-index: -1;
+            overflow: hidden;
         }
 
-        .container {
-            width: 90%;
-            max-width: 800px;
+        .blob {
+            position: absolute;
+            background: radial-gradient(circle, rgba(130, 80, 255, 0.2) 0%, rgba(0,0,0,0) 70%);
+            filter: blur(80px);
+            border-radius: 50%;
+        }
+
+        .blob-1 { width: 500px; height: 500px; top: -100px; left: -100px; }
+        .blob-2 { width: 400px; height: 400px; bottom: -50px; right: -50px; }
+
+        /* Karta Główna */
+        .hero-card {
             background: var(--glass-bg);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             border: 1px solid var(--glass-border);
-            border-radius: 30px;
-            padding: 40px;
-            box-shadow: 0 40px 100px rgba(0,0,0,0.5);
-            margin: 20px;
+            border-radius: 35px;
+            padding: 60px 40px;
+            text-align: center;
+            max-width: 550px;
+            width: 90%;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+            animation: fadeIn 1s ease-out;
         }
 
-        header {
-            text-align: center;
-            margin-bottom: 40px;
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .profile-img {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, var(--accent-color), #5031a5);
+            border-radius: 50%;
+            margin: 0 auto 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            box-shadow: 0 0 20px rgba(157, 124, 255, 0.3);
         }
 
         h1 {
-            font-size: 2.5rem;
-            margin-bottom: 10px;
+            font-size: 3rem;
+            margin: 0 0 15px 0;
             letter-spacing: -1px;
         }
 
-        header p {
-            color: rgba(255, 255, 255, 0.5);
+        p {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 40px;
         }
 
-        /* Lista plików */
-        .file-list {
+        /* Przyciski nawigacyjne */
+        .nav-buttons {
             display: flex;
             flex-direction: column;
             gap: 15px;
-        }
-
-        .file-item {
-            display: flex;
             align-items: center;
-            justify-content: space-between;
-            padding: 15px 25px;
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid transparent;
-            border-radius: 15px;
-            transition: all 0.3s ease;
         }
 
-        .file-item:hover {
-            background: rgba(255, 255, 255, 0.08);
-            border-color: var(--glass-border);
-            transform: scale(1.02);
-        }
-
-        .file-info {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-        }
-
-        .file-icon {
-            font-size: 1.5rem;
-            color: var(--accent-color);
-        }
-
-        .file-name {
-            font-weight: 500;
-            display: block;
-        }
-
-        .file-size {
-            font-size: 0.8rem;
-            color: rgba(255, 255, 255, 0.4);
-        }
-
-        .download-btn {
+        .btn-primary {
             background: white;
             color: black;
             text-decoration: none;
-            padding: 8px 20px;
-            border-radius: 10px;
-            font-size: 0.9rem;
+            padding: 16px 40px;
+            border-radius: 15px;
             font-weight: 700;
+            width: 80%;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .btn-primary:hover {
+            transform: scale(1.03);
+            background: var(--accent-color);
+            color: white;
+            box-shadow: 0 10px 25px rgba(157, 124, 255, 0.4);
+        }
+
+        .btn-secondary {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            font-size: 0.9rem;
             transition: 0.3s;
         }
 
-        .download-btn:hover {
-            background: var(--accent-color);
+        .btn-secondary:hover {
             color: white;
-            box-shadow: 0 0 15px var(--accent-color);
         }
 
-        footer {
+        .social-icons {
             margin-top: 30px;
-            text-align: center;
-            font-size: 0.8rem;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .social-icons a {
             color: rgba(255, 255, 255, 0.3);
+            font-size: 1.2rem;
+            transition: 0.3s;
+        }
+
+        .social-icons a:hover {
+            color: var(--accent-color);
         }
     </style>
 </head>
 <body>
 
-    <div class="bg-gradient"></div>
+    <div class="bg-blobs">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+    </div>
 
-    <div class="container">
-        <header>
-            <h1>Moje Pliki</h1>
-            <p>Pobierz najnowsze wersje moich projektów</p>
-        </header>
+    <div class="hero-card">
+        <div class="profile-img">
+            <i class="fas fa-user"></i>
+        </div>
+        <h1>Julian</h1>
+        <p>Witaj w moim centrum projektów. Znajdziesz tutaj moje autorskie narzędzia, skrypty oraz materiały do pobrania.</p>
 
-        <div class="file-list">
-            <div class="file-item">
-                <div class="file-info">
-                    <i class="fas fa-file-code file-icon"></i>
-                    <div>
-                        <span class="file-name">Skrypt_Automatyzacji_v1.zip</span>
-                        <span class="file-size">4.2 MB • Dodano: 10.01.2024</span>
-                    </div>
-                </div>
-                <a href="link_do_pliku_1.zip" class="download-btn">Pobierz</a>
-            </div>
-
-            <div class="file-item">
-                <div class="file-info">
-                    <i class="fas fa-file-pdf file-icon"></i>
-                    <div>
-                        <span class="file-name">Dokumentacja_Techniczna.pdf</span>
-                        <span class="file-size">1.8 MB • Dodano: 05.01.2024</span>
-                    </div>
-                </div>
-                <a href="link_do_pliku_2.pdf" class="download-btn">Pobierz</a>
-            </div>
-
-            <div class="file-item">
-                <div class="file-info">
-                    <i class="fas fa-file-image file-icon"></i>
-                    <div>
-                        <span class="file-name">Paczka_Grafik_UI.rar</span>
-                        <span class="file-size">12.5 MB • Dodano: 01.01.2024</span>
-                    </div>
-                </div>
-                <a href="link_do_pliku_3.rar" class="download-btn">Pobierz</a>
-            </div>
+        <div class="nav-buttons">
+            <a href="downloads.html" class="btn-primary">
+                <i class="fas fa-download"></i> Przejdź do pobierania
+            </a>
+            
+            <a href="#" class="btn-secondary">Dowiedz się więcej o mnie</a>
         </div>
 
-        <footer>
-            &copy; 2024 Julian. Wszystkie pliki są mojego autorstwa.
-        </footer>
+        <div class="social-icons">
+            <a href="#"><i class="fab fa-github"></i></a>
+            <a href="#"><i class="fab fa-discord"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+        </div>
     </div>
 
 </body>
