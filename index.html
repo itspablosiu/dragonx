@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Resource Hub | Julian</title>
+    <title>Julian | Repository</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --bg: #050507;
+            --bg: #030305;
             --accent: #9d7cff;
             --glass: rgba(255, 255, 255, 0.02);
-            --glass-border: rgba(255, 255, 255, 0.07);
+            --glass-border: rgba(255, 255, 255, 0.05);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -18,195 +18,146 @@
         body {
             background-color: var(--bg);
             color: white;
-            font-family: 'Inter', -apple-system, sans-serif;
-            overflow: hidden; /* Strona typu "Single View" bez przewijania */
-        }
-
-        /* --- TŁO SIATKI --- */
-        .viewport-container {
-            position: relative;
-            width: 100vw;
+            font-family: 'Inter', sans-serif;
             height: 100vh;
             display: flex;
             flex-direction: column;
-            background-image: 
-                radial-gradient(circle at 2px 2px, rgba(157, 124, 255, 0.05) 1px, transparent 0);
+            overflow: hidden;
+        }
+
+        /* TŁO - SIATKA I POŚWIATA */
+        .grid-bg {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: radial-gradient(rgba(157, 124, 255, 0.05) 1px, transparent 1px);
             background-size: 40px 40px;
+            z-index: -1;
         }
 
         .glow {
-            position: absolute;
-            top: -10%; right: -10%;
-            width: 50%; height: 50%;
-            background: radial-gradient(circle, rgba(157, 124, 255, 0.08) 0%, transparent 70%);
+            position: fixed;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80vw; height: 80vh;
+            background: radial-gradient(circle, rgba(157, 124, 255, 0.05) 0%, transparent 70%);
             filter: blur(100px);
-            pointer-events: none;
+            z-index: -1;
         }
 
-        /* --- NAVBAR --- */
+        /* NAVBAR */
         nav {
-            padding: 40px 6%;
+            padding: 40px 8%;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
 
-        .system-status {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            color: var(--accent);
-        }
+        .logo { font-weight: 900; font-size: 1.4rem; letter-spacing: 2px; }
+        .logo span { color: var(--accent); }
 
-        .status-dot {
-            width: 8px; height: 8px;
-            background: var(--accent);
-            border-radius: 50%;
-            box-shadow: 0 0 10px var(--accent);
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.3; } 100% { opacity: 1; } }
-
-        /* --- LAYOUT --- */
+        /* SEKCJA GŁÓWNA */
         main {
             flex: 1;
-            display: grid;
-            grid-template-columns: 1.2fr 0.8fr;
-            padding: 0 6%;
+            display: flex;
             align-items: center;
-            gap: 50px;
+            padding: 0 8%;
         }
 
-        .hero-text h1 {
-            font-size: clamp(3rem, 10vw, 6rem);
+        .content { max-width: 800px; }
+
+        .content h1 {
+            font-size: clamp(3.5rem, 10vw, 6rem);
+            line-height: 0.95;
+            margin-bottom: 25px;
             font-weight: 900;
-            line-height: 0.9;
-            margin-bottom: 20px;
-            letter-spacing: -3px;
+            background: linear-gradient(to bottom right, #fff 50%, #444);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
-        .hero-text p {
-            font-size: 1.1rem;
-            color: rgba(255,255,255,0.4);
-            max-width: 500px;
-            margin-bottom: 40px;
+        .content p {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.4);
+            margin-bottom: 45px;
+            max-width: 550px;
+            line-height: 1.5;
         }
 
-        /* --- PANEL STATYSTYK --- */
-        .data-panel {
-            background: var(--glass);
-            border: 1px solid var(--glass-border);
-            border-radius: 30px;
-            padding: 40px;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 30px;
-            backdrop-filter: blur(20px);
-        }
-
-        .data-point {
-            display: flex;
-            flex-direction: column;
-            gap: 5px;
-        }
-
-        .data-value { font-size: 2rem; font-weight: 800; }
-        .data-label { font-size: 0.7rem; color: rgba(255,255,255,0.3); text-transform: uppercase; letter-spacing: 1px; }
-
-        /* --- PRZYCISKI --- */
-        .action-row {
-            display: flex;
+        /* PRZYCISK */
+        .cta-box {
+            display: inline-flex;
             align-items: center;
-            gap: 20px;
         }
 
         .btn-main {
-            background: #fff;
-            color: #000;
+            background: var(--accent);
+            color: white;
             text-decoration: none;
-            padding: 22px 45px;
-            border-radius: 18px;
+            padding: 22px 50px;
+            border-radius: 15px;
             font-weight: 800;
+            font-size: 1.1rem;
+            letter-spacing: 1px;
+            transition: 0.3s cubic-bezier(0.2, 1, 0.3, 1);
             display: flex;
             align-items: center;
-            gap: 12px;
-            transition: 0.3s cubic-bezier(0.19, 1, 0.22, 1);
+            gap: 15px;
         }
 
         .btn-main:hover {
             transform: translateX(10px);
-            background: var(--accent);
-            color: white;
-            box-shadow: 0 20px 40px rgba(157, 124, 255, 0.2);
+            box-shadow: 0 15px 40px rgba(157, 124, 255, 0.3);
+            background: #af94ff;
         }
 
-        .btn-secondary {
-            color: rgba(255,255,255,0.5);
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 0.9rem;
-            transition: 0.3s;
+        /* STATUS DOLNY */
+        footer {
+            padding: 40px 8%;
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.2);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            display: flex;
+            gap: 30px;
         }
 
-        .btn-secondary:hover { color: #fff; }
+        .status-item span { color: var(--accent); font-weight: bold; }
 
-        @media (max-width: 1024px) {
-            main { grid-template-columns: 1fr; overflow-y: auto; padding-bottom: 50px; }
-            .hero-text h1 { font-size: 4rem; }
-            body { overflow: auto; }
+        @media (max-width: 768px) {
+            .content h1 { font-size: 3.5rem; }
+            nav, main, footer { padding-left: 5%; padding-right: 5%; }
         }
     </style>
 </head>
 <body>
 
-    <div class="viewport-container">
-        <div class="glow"></div>
+    <div class="grid-bg"></div>
+    <div class="glow"></div>
 
-        <nav>
-            <div class="system-status">
-                <div class="status-dot"></div>
-                Source Online / V2.4.0
-            </div>
-            <div class="logo">JULIAN<span style="color:var(--accent)">.</span>PRO</div>
-        </nav>
+    <nav>
+        <div class="logo">JULIAN<span>.</span>IO</div>
+        <div class="nav-links">
+            <a href="downloads.html" style="color:white; text-decoration:none; font-weight: 600; font-size: 0.9rem; opacity: 0.6;">REPOSITORY</a>
+        </div>
+    </nav>
 
-        <main>
-            <div class="hero-text">
-                <h1>FILES<br>DEPOSITORY</h1>
-                <p>Bezpośredni dostęp do bazy autorskich skryptów, narzędzi deweloperskich i assetów cyfrowych.</p>
-                
-                <div class="action-row">
-                    <a href="downloads.html" class="btn-main">
-                        LISTA PLIKÓW <i class="fas fa-arrow-right"></i>
-                    </a>
-                    <a href="#" class="btn-secondary">Discord Support</a>
-                </div>
+    <main>
+        <div class="content">
+            <h1>DIGITAL<br>RESOURCES.</h1>
+            <p>Dostęp do bazy autorskich narzędzi, plików graficznych i skryptów. Wszystkie materiały gotowe do pobrania.</p>
+            
+            <div class="cta-box">
+                <a href="downloads.html" class="btn-main">
+                    POBIERZ PLIKI <i class="fas fa-chevron-right"></i>
+                </a>
             </div>
+        </div>
+    </main>
 
-            <div class="data-panel">
-                <div class="data-point">
-                    <span class="data-value">124</span>
-                    <span class="data-label">Aktywne Pliki</span>
-                </div>
-                <div class="data-point">
-                    <span class="data-value">12.5k</span>
-                    <span class="data-label">Transfer (GB)</span>
-                </div>
-                <div class="data-point">
-                    <span class="data-value">99.9%</span>
-                    <span class="data-label">Uptime</span>
-                </div>
-                <div class="data-point">
-                    <span class="data-value">GPL</span>
-                    <span class="data-label">Licencja</span>
-                </div>
-            </div>
-        </main>
-    </div>
+    <footer>
+        <div class="status-item">Status: <span>Online</span></div>
+        <div class="status-item">Version: <span>2024.1</span></div>
+    </footer>
 
 </body>
 </html>
