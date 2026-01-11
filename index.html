@@ -4,106 +4,125 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portfolio - Julian</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* Podstawowe resetowanie i tło */
         body, html {
             margin: 0;
             padding: 0;
             height: 100%;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Inter', 'Segoe UI', sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
-            background-color: #0d0d14; /* Ciemne tło */
+            background-color: #08080c;
             overflow: hidden;
+            color: white;
         }
 
-        /* Dekoracyjne światła w tle */
-        .background-glow {
+        /* Dynamiczne tło */
+        .bg-glow {
             position: absolute;
-            width: 400px;
-            height: 400px;
-            background: radial-gradient(circle, rgba(90, 40, 200, 0.4) 0%, rgba(0,0,0,0) 70%);
-            filter: blur(50px);
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(100, 50, 255, 0.3) 0%, rgba(0,0,0,0) 70%);
+            border-radius: 50%;
+            filter: blur(80px);
             z-index: -1;
-            top: 20%;
-            left: 15%;
+            animation: pulse 8s infinite alternate;
         }
 
-        /* Główna karta - Glassmorphism */
+        @keyframes pulse {
+            0% { transform: translate(-20%, -20%); opacity: 0.5; }
+            100% { transform: translate(20%, 10%); opacity: 0.8; }
+        }
+
+        /* Karta z animacją pojawiania się */
         .glass-card {
-            background: rgba(255, 255, 255, 0.05); /* Półprzezroczyste tło */
-            backdrop-filter: blur(15px); /* Efekt rozmycia szkła */
-            -webkit-backdrop-filter: blur(15px);
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 30px;
-            padding: 60px 40px;
-            width: 80%;
-            max-width: 600px;
+            border-radius: 40px;
+            padding: 50px;
+            width: 90%;
+            max-width: 500px;
             text-align: center;
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
-            position: relative;
+            box-shadow: 0 40px 100px rgba(0, 0, 0, 0.8);
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeIn 1.2s ease-out forwards;
         }
 
-        /* Akcenty świetlne na krawędziach karty */
-        .glass-card::before {
-            content: "";
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            border-radius: 30px;
-            padding: 1px;
-            background: linear-gradient(135deg, rgba(130, 80, 255, 0.5), transparent, rgba(130, 80, 255, 0.5));
-            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-            mask-composite: exclude;
-            pointer-events: none;
+        @keyframes fadeIn {
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Tekst */
         h1 {
-            color: #ffffff;
-            font-size: 3rem;
-            margin-bottom: 20px;
-            font-weight: 700;
-            letter-spacing: 1px;
+            font-size: 3.5rem;
+            margin-bottom: 10px;
+            background: linear-gradient(to bottom, #fff, #aaa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         p {
-            color: rgba(255, 255, 255, 0.7);
-            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.6);
             line-height: 1.6;
-            margin-bottom: 40px;
-            max-width: 400px;
-            margin-left: auto;
-            margin-right: auto;
+            margin-bottom: 35px;
         }
 
         /* Przycisk */
         .btn {
-            background-color: #ffffff;
-            color: #000000;
-            padding: 15px 40px;
-            border-radius: 50px;
+            background: #fff;
+            color: #000;
+            padding: 16px 35px;
+            border-radius: 100px;
             text-decoration: none;
-            font-weight: bold;
-            font-size: 1rem;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            font-weight: 700;
+            transition: all 0.3s ease;
             display: inline-block;
+            margin-bottom: 30px;
         }
 
         .btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(255, 255, 255, 0.2);
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
+        }
+
+        /* Sekcja Social Media */
+        .socials {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .socials a {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 1.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .socials a:hover {
+            color: #fff;
         }
     </style>
 </head>
 <body>
 
-    <div class="background-glow"></div>
+    <div class="bg-glow"></div>
 
     <div class="glass-card">
         <h1>Julian</h1>
-        <p>To moja strona. Tutaj znajdziesz moje projekty i dowiesz się więcej o mnie.</p>
-        <a href="#" class="btn">Odkryj portfolio</a>
+        <p>Pasjonat technologii i designu. Tworzę cyfrowe doświadczenia, które łączą estetykę z funkcjonalnością.</p>
+        
+        <a href="#" class="btn">Odkryj Portfolio</a>
+
+        <div class="socials">
+            <a href="#"><i class="fab fa-github"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-linkedin"></i></a>
+            <a href="#"><i class="fas fa-envelope"></i></a>
+        </div>
     </div>
 
 </body>
