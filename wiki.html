@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Julian by Pablosiu - Wiki</title>
-<style>
+    <style>
         :root {
             --glass-bg: rgba(255, 255, 255, 0.04);
             --glass-border: rgba(255, 255, 255, 0.08);
@@ -22,6 +22,7 @@
             align-items: center;
             min-height: 100vh;
             overflow-x: hidden;
+            position: relative; /* Potrzebne do pozycjonowania przycisku powrotu */
         }
 
         .bg-blur {
@@ -34,6 +35,28 @@
             z-index: -1;
         }
 
+        /* PRZYCISK POWROTU */
+        .back-nav {
+            position: absolute;
+            top: 40px;
+            left: 40px;
+            z-index: 10;
+        }
+
+        .back-link {
+            text-decoration: none;
+            color: rgba(255, 255, 255, 0.3);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            transition: 0.3s;
+            font-weight: 600;
+        }
+
+        .back-link:hover {
+            color: var(--accent);
+        }
+
         /* Kontener na karty */
         .cards-wrapper {
             display: flex;
@@ -41,7 +64,7 @@
             gap: 20px;
             width: 90%;
             max-width: 450px;
-            padding: 40px 0;
+            padding: 60px 0;
         }
 
         .info-card {
@@ -52,12 +75,13 @@
             border-radius: 20px;
             padding: 40px;
             text-align: center;
-            transition: transform 0.3s ease;
+            transition: 0.3s ease;
         }
 
         .info-card:hover {
             transform: translateY(-5px);
             background: rgba(255, 255, 255, 0.06);
+            border-color: rgba(255, 255, 255, 0.15);
         }
 
         h1 {
@@ -96,7 +120,7 @@
             box-shadow: 0 10px 25px rgba(157, 124, 255, 0.3);
         }
 
-        /* --- MODAL (bez zmian) --- */
+        /* MODAL */
         .modal-overlay {
             position: fixed;
             top: 0; left: 0;
@@ -110,6 +134,8 @@
             padding: 20px;
         }
 
+        .modal-overlay.active { display: flex; }
+
         .modal-content {
             background: #0f0f16;
             border: 1px solid var(--glass-border);
@@ -120,8 +146,6 @@
             max-height: 90vh;
             overflow-y: auto;
         }
-
-        .modal-overlay.active { display: flex; }
 
         .enchant-grid {
             display: grid;
@@ -161,11 +185,19 @@
             width: 100%;
             font-weight: 600;
         }
+
+        @media (max-width: 600px) {
+            .back-nav { top: 20px; left: 20px; }
+        }
     </style>
 </head>
 <body>
 
     <div class="bg-blur"></div>
+
+    <nav class="back-nav">
+        <a href="downloads.html" class="back-link">&larr; Powrót</a>
+    </nav>
 
     <div class="cards-wrapper">
         
@@ -176,8 +208,8 @@
         </div>
 
         <div class="info-card">
-            <h1>Wkrotce Wiecej</h1>
-            <p></p>
+            <h1>Dokumentacja</h1>
+            <p>Sprawdź instrukcję instalacji oraz najczęściej zadawane pytania dotyczące plików.</p>
             <button class="open-modal-btn" onclick="alert('Wkrótce dostępne!')">Zobacz więcej</button>
         </div>
 
@@ -213,7 +245,7 @@
                         <li><b>Sweeping Edge:</b> <code>sweeping_edge</code></li>
                     </ul>
                 </div>
-                </div>
+            </div>
             <button class="close-btn" onclick="toggleModal()">Zamknij</button>
         </div>
     </div>
