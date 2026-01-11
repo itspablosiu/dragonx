@@ -1,1 +1,110 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio - Julian</title>
+    <style>
+        /* Podstawowe resetowanie i tło */
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #0d0d14; /* Ciemne tło */
+            overflow: hidden;
+        }
 
+        /* Dekoracyjne światła w tle */
+        .background-glow {
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(90, 40, 200, 0.4) 0%, rgba(0,0,0,0) 70%);
+            filter: blur(50px);
+            z-index: -1;
+            top: 20%;
+            left: 15%;
+        }
+
+        /* Główna karta - Glassmorphism */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.05); /* Półprzezroczyste tło */
+            backdrop-filter: blur(15px); /* Efekt rozmycia szkła */
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 30px;
+            padding: 60px 40px;
+            width: 80%;
+            max-width: 600px;
+            text-align: center;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+            position: relative;
+        }
+
+        /* Akcenty świetlne na krawędziach karty */
+        .glass-card::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            border-radius: 30px;
+            padding: 1px;
+            background: linear-gradient(135deg, rgba(130, 80, 255, 0.5), transparent, rgba(130, 80, 255, 0.5));
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask-composite: exclude;
+            pointer-events: none;
+        }
+
+        /* Tekst */
+        h1 {
+            color: #ffffff;
+            font-size: 3rem;
+            margin-bottom: 20px;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        p {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 40px;
+            max-width: 400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Przycisk */
+        .btn {
+            background-color: #ffffff;
+            color: #000000;
+            padding: 15px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: inline-block;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(255, 255, 255, 0.2);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="background-glow"></div>
+
+    <div class="glass-card">
+        <h1>Julian</h1>
+        <p>To moja strona. Tutaj znajdziesz moje projekty i dowiesz się więcej o mnie.</p>
+        <a href="#" class="btn">Odkryj portfolio</a>
+    </div>
+
+</body>
+</html>
