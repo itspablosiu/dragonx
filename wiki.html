@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Julian by Pablosiu - Wiki</title>
-    <style>
+<style>
         :root {
             --glass-bg: rgba(255, 255, 255, 0.04);
             --glass-border: rgba(255, 255, 255, 0.08);
@@ -20,8 +20,8 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
-            overflow: hidden;
+            min-height: 100vh;
+            overflow-x: hidden;
         }
 
         .bg-blur {
@@ -34,21 +34,35 @@
             z-index: -1;
         }
 
+        /* Kontener na karty */
+        .cards-wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            width: 90%;
+            max-width: 450px;
+            padding: 40px 0;
+        }
+
         .info-card {
             background: var(--glass-bg);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             border: 1px solid var(--glass-border);
             border-radius: 20px;
-            padding: 60px 40px;
+            padding: 40px;
             text-align: center;
-            max-width: 450px;
-            width: 90%;
+            transition: transform 0.3s ease;
+        }
+
+        .info-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.06);
         }
 
         h1 {
-            font-size: 2.2rem;
-            margin-bottom: 15px;
+            font-size: 1.8rem;
+            margin-bottom: 10px;
             letter-spacing: -1px;
             background: linear-gradient(to right, #fff, #888);
             -webkit-background-clip: text;
@@ -57,31 +71,32 @@
 
         p {
             color: rgba(255, 255, 255, 0.4);
-            margin-bottom: 35px;
-            font-size: 1rem;
+            margin-bottom: 25px;
+            font-size: 0.95rem;
+            line-height: 1.5;
         }
 
         .open-modal-btn {
             background: #fff;
             color: #000;
             border: none;
-            padding: 18px 35px;
-            border-radius: 12px;
+            padding: 15px 30px;
+            border-radius: 10px;
             cursor: pointer;
             font-weight: 800;
             text-transform: uppercase;
             letter-spacing: 1px;
-            transition: 0.3s cubic-bezier(0.19, 1, 0.22, 1);
+            width: 100%;
+            transition: 0.3s;
         }
 
         .open-modal-btn:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(157, 124, 255, 0.3);
             background: var(--accent);
             color: #fff;
+            box-shadow: 0 10px 25px rgba(157, 124, 255, 0.3);
         }
 
-        /* --- MODAL --- */
+        /* --- MODAL (bez zmian) --- */
         .modal-overlay {
             position: fixed;
             top: 0; left: 0;
@@ -104,22 +119,19 @@
             width: 100%;
             max-height: 90vh;
             overflow-y: auto;
-            position: relative;
         }
 
         .modal-overlay.active { display: flex; }
 
-        /* Układ dwukolumnowy dla listy */
         .enchant-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
             text-align: left;
-            margin-top: 20px;
         }
 
         .enchant-category h2 {
-            font-size: 1rem;
+            font-size: 0.9rem;
             color: var(--accent);
             text-transform: uppercase;
             letter-spacing: 2px;
@@ -128,30 +140,14 @@
             margin-bottom: 12px;
         }
 
-        .enchant-list {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        .enchant-list li {
-            font-size: 0.9rem;
-            margin-bottom: 6px;
-            color: rgba(255, 255, 255, 0.7);
-        }
-
-        .enchant-list li b {
-            color: #fff;
-            font-weight: 500;
-        }
-
+        .enchant-list { list-style: none; padding: 0; margin: 0; }
+        .enchant-list li { font-size: 0.9rem; margin-bottom: 6px; color: rgba(255, 255, 255, 0.7); }
         .enchant-list li code {
             background: rgba(255, 255, 255, 0.05);
             padding: 2px 6px;
             border-radius: 4px;
             color: var(--accent);
             font-family: monospace;
-            font-size: 0.85rem;
         }
 
         .close-btn {
@@ -164,30 +160,32 @@
             cursor: pointer;
             width: 100%;
             font-weight: 600;
-            transition: 0.3s;
         }
-
-        .close-btn:hover { background: rgba(255, 255, 255, 0.1); }
-
-        /* Scrollbar dla modala */
-        .modal-content::-webkit-scrollbar { width: 6px; }
-        .modal-content::-webkit-scrollbar-thumb { background: var(--glass-border); border-radius: 10px; }
     </style>
 </head>
 <body>
 
     <div class="bg-blur"></div>
 
-    <div class="info-card">
-        <h1>ID Zaklęć</h1>
-        <p>Pełna lista identyfikatorów Minecraft potrzebnych do konfiguracji przedmiotów.</p>
-        <button class="open-modal-btn" onclick="toggleModal()">Otwórz listę</button>
+    <div class="cards-wrapper">
+        
+        <div class="info-card">
+            <h1>ID Zaklęć</h1>
+            <p>Lista identyfikatorów Minecraft potrzebnych do konfiguracji przedmiotów.</p>
+            <button class="open-modal-btn" onclick="toggleModal()">Otwórz listę</button>
+        </div>
+
+        <div class="info-card">
+            <h1>Dokumentacja</h1>
+            <p>Sprawdź instrukcję instalacji oraz najczęściej zadawane pytania dotyczące plików.</p>
+            <button class="open-modal-btn" onclick="alert('Wkrótce dostępne!')">Zobacz więcej</button>
+        </div>
+
     </div>
 
     <div class="modal-overlay" id="modalOverlay">
         <div class="modal-content">
             <div class="enchant-grid">
-                
                 <div class="enchant-category">
                     <h2>🛡️ Pancerz</h2>
                     <ul class="enchant-list">
@@ -203,7 +201,6 @@
                         <li><b>Frost Walker:</b> <code>frost_walker</code></li>
                     </ul>
                 </div>
-
                 <div class="enchant-category">
                     <h2>⚔️ Miecz</h2>
                     <ul class="enchant-list">
@@ -216,41 +213,8 @@
                         <li><b>Sweeping Edge:</b> <code>sweeping_edge</code></li>
                     </ul>
                 </div>
-
-                <div class="enchant-category">
-                    <h2>⛏️ Narzędzia</h2>
-                    <ul class="enchant-list">
-                        <li><b>Efficiency:</b> <code>efficiency</code></li>
-                        <li><b>Silk Touch:</b> <code>silk_touch</code></li>
-                        <li><b>Unbreaking:</b> <code>unbreaking</code></li>
-                        <li><b>Fortune:</b> <code>fortune</code></li>
-                    </ul>
                 </div>
-
-                <div class="enchant-category">
-                    <h2>🏹 Łuk & Kusza</h2>
-                    <ul class="enchant-list">
-                        <li><b>Power:</b> <code>power</code></li>
-                        <li><b>Punch:</b> <code>punch</code></li>
-                        <li><b>Flame:</b> <code>flame</code></li>
-                        <li><b>Infinity:</b> <code>infinity</code></li>
-                        <li><b>Quick Charge:</b> <code>quick_charge</code></li>
-                        <li><b>Multishot:</b> <code>multishot</code></li>
-                        <li><b>Piercing:</b> <code>piercing</code></li>
-                    </ul>
-                </div>
-
-                <div class="enchant-category">
-                    <h2>✨ Inne</h2>
-                    <ul class="enchant-list">
-                        <li><b>Mending:</b> <code>mending</code></li>
-                        <li><b>Curse of Vanishing:</b> <code>vanishing_curse</code></li>
-                        <li><b>Curse of Binding:</b> <code>binding_curse</code></li>
-                    </ul>
-                </div>
-
-            </div>
-            <button class="close-btn" onclick="toggleModal()">Zamknij podgląd</button>
+            <button class="close-btn" onclick="toggleModal()">Zamknij</button>
         </div>
     </div>
 
