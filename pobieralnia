@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Julian - Pobieralnia</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --glass-bg: rgba(255, 255, 255, 0.04);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --accent: #9d7cff; /* Fioletowy neon z obrazka */
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #0b0b12;
+            color: #fff;
+            font-family: 'Inter', sans-serif;
+            display: flex;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        /* Tło z poświatą */
+        .bg-blur {
+            position: fixed;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 600px; height: 600px;
+            background: radial-gradient(circle, rgba(130, 80, 255, 0.15) 0%, transparent 70%);
+            filter: blur(60px);
+            z-index: -1;
+        }
+
+        .main-container {
+            width: 100%;
+            max-width: 900px;
+            padding: 60px 20px;
+        }
+
+        /* Przycisk powrotu */
+        .back-link {
+            text-decoration: none;
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 0.9rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 30px;
+            transition: 0.3s;
+        }
+
+        .back-link:hover { color: #fff; }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin: 0;
+            background: linear-gradient(to right, #fff, #888);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .category-label {
+            margin-top: 40px;
+            margin-bottom: 20px;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--accent);
+            font-weight: bold;
+        }
+
+        /* Kontener plików */
+        .download-grid {
+            display: grid;
+            gap: 15px;
+        }
+
+        .download-item {
+            background: var(--glass-bg);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 20px 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .download-item:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.2);
+            transform: scale(1.01);
+        }
+
+        .file-meta {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .file-icon {
+            width: 50px;
+            height: 50px;
+            background: rgba(157, 124, 255, 0.1);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent);
+            font-size: 1.4rem;
+        }
+
+        .file-details h3 {
+            margin: 0;
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+
+        .file-details span {
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.4);
+        }
+
+        /* Przycisk Pobierz */
+        .dl-button {
+            background: #fff;
+            color: #000;
+            text-decoration: none;
+            padding: 10px 24px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: 0.3s;
+        }
+
+        .dl-button:hover {
+            background: var(--accent);
+            color: #fff;
+            box-shadow: 0 0 20px rgba(157, 124, 255, 0.4);
+        }
+
+        /* Wersja mobilna */
+        @media (max-width: 600px) {
+            .download-item { flex-direction: column; align-items: flex-start; gap: 20px; }
+            .dl-button { width: 100%; justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="bg-blur"></div>
+
+    <div class="main-container">
+        <a href="index.html" class="back-link">
+            <i class="fas fa-arrow-left"></i> Wróć do strony głównej
+        </a>
+
+        <header>
+            <h1>Download Center</h1>
+            <p style="color: rgba(255,255,255,0.5)">Wszystkie pliki są udostępniane na licencji Open Source.</p>
+        </header>
+
+        <div class="category-label">Skrypty i Narzędzia</div>
+        <div class="download-grid">
+            
+            <div class="download-item">
+                <div class="file-meta">
+                    <div class="file-icon"><i class="fas fa-terminal"></i></div>
+                    <div class="file-details">
+                        <h3>AutoConfig Pro v2.0</h3>
+                        <span>ZIP • 14.5 MB • Aktualizacja: Dzisiaj</span>
+                    </div>
+                </div>
+                <a href="files/autoconfig.zip" class="dl-button">
+                    <i class="fas fa-download"></i> Pobierz
+                </a>
+            </div>
+
+            <div class="download-item">
+                <div class="file-meta">
+                    <div class="file-icon"><i class="fas fa-code"></i></div>
+                    <div class="file-details">
+                        <h3>Web Boilerplate Glass</h3>
+                        <span>RAR • 2.1 MB • 12 sty 2024</span>
+                    </div>
+                </div>
+                <a href="files/boilerplate.rar" class="dl-button">
+                    <i class="fas fa-download"></i> Pobierz
+                </a>
+            </div>
+
+        </div>
+
+        <div class="category-label">Design & Grafika</div>
+        <div class="download-grid">
+            <div class="download-item">
+                <div class="file-meta">
+                    <div class="file-icon"><i class="fas fa-palette"></i></div>
+                    <div class="file-details">
+                        <h3>Glassmorphism UI Pack</h3>
+                        <span>FIG • 45.0 MB • 05 sty 2024</span>
+                    </div>
+                </div>
+                <a href="files/ui-pack.fig" class="dl-button">
+                    <i class="fas fa-download"></i> Pobierz
+                </a>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>
